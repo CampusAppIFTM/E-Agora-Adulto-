@@ -1,7 +1,12 @@
 {
   "expo": {
+<<<<<<< HEAD
     "name": "ph-auth",
     "slug": "ph-auth",
+=======
+    "name": "aula-criacao-app",
+    "slug": "aula-criacao-app",
+>>>>>>> 047867ef830105c9bc7a8a1a9839c7fe6e6d55a3
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,12 +21,16 @@
       "supportsTablet": true
     },
     "android": {
+<<<<<<< HEAD
       "googleServicesFile": "./google-services.json",
       "package": "ph.com.br",
+=======
+>>>>>>> 047867ef830105c9bc7a8a1a9839c7fe6e6d55a3
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+<<<<<<< HEAD
       "edgeToEdgeEnabled": true
     },
     "web": {
@@ -32,3 +41,13 @@
     ]
   }
 }
+=======
+      "edgeToEdgeEnabled": true,
+      "package": "br.edu.iftm"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
+>>>>>>> 047867ef830105c9bc7a8a1a9839c7fe6e6d55a3
