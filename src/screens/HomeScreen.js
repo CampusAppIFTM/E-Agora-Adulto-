@@ -11,12 +11,17 @@
  * ---------------------------------------------------------------------------
  */
 import { useState } from "react";
-import { View, Text, Image, Button, StyleSheet } from "react-native";
+import { ImageBackground, Pressable, StyleSheet, View } from "react-native";
+import { StatusBar } from "expo-status-bar";
 
 import { sair } from "../services/autenticacao";
+import CurriculoScreen from "./CurriculoScreen";
+import EntrevistaScreen from "./EntrevistaScreen";
+import PosturaScreen from "./PosturaScreen";
 
 const HomeScreen = ({ usuario }) => {
   const [saindo, setSaindo] = useState(false);
+  const [telaAtual, setTelaAtual] = useState("home");
 
   const aoSair = async () => {
     setSaindo(true);
@@ -30,30 +35,38 @@ const HomeScreen = ({ usuario }) => {
     // desmontado pelo observador -- atualizar o estado depois disso gera aviso.
   };
 
+  if (telaAtual === "curriculo") {
+    return <CurriculoScreen onVoltar={() => setTelaAtual("home")} />;
+  }
+
+  if (telaAtual === "entrevista") {
+    return <EntrevistaScreen onVoltar={() => setTelaAtual("home")} />;
+  }
+
+  if (telaAtual === "postura") {
+    return <PosturaScreen onVoltar={() => setTelaAtual("home")} />;
+  }
+
   return (
     <View style={styles.container}>
-      {/*
-        photoURL pode ser null (contas sem foto). O operador ternário evita
-        passar { uri: null } para o Image, que resulta em um quadro em branco.
-      */}
-      {usuario.photoURL ? (
-        <Image style={styles.foto} source={{ uri: usuario.photoURL }} />
-      ) : (
-        <View style={[styles.foto, styles.fotoVazia]}>
-          <Text style={styles.inicial}>
-            {(usuario.displayName ?? "?").charAt(0).toUpperCase()}
-          </Text>
-        </View>
-      )}
+      <StatusBar hidden />
+      <ImageBackground source={require("../../assets/home.png")} resizeMode="stretch" style={styles.mapa} imageStyle={styles.imagemMapa}>
+        <Pressable accessibilityLabel="Abrir menu" accessibilityRole="button" style={styles.menu} onPress={aoSair} disabled={saindo} />
 
-      {/* ?? cobre o caso de displayName ser null, não apenas undefined. */}
-      <Text style={styles.nome}>Olá, {usuario.displayName ?? "usuário"}!</Text>
-      <Text style={styles.email}>{usuario.email}</Text>
-      <Text style={styles.uid}>uid: {usuario.uid}</Text>
-
-      <View style={styles.botao}>
-        <Button title="Sair" onPress={aoSair} disabled={saindo} />
-      </View>
+        <Pressable
+          accessibilityLabel="Abrir currículo"
+          accessibilityRole="button"
+          style={styles.curriculo}
+          onPress={() => setTelaAtual("curriculo")}
+        />
+        <Pressable
+          accessibilityLabel="Abrir entrevistas"
+          accessibilityRole="button"
+          style={styles.entrevista}
+          onPress={() => setTelaAtual("entrevista")}
+        />
+        <Pressable accessibilityLabel="Abrir postura" accessibilityRole="button" style={styles.postura} onPress={() => setTelaAtual("postura")} />
+      </ImageBackground>
     </View>
   );
 };
@@ -63,42 +76,42 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#fff",
-    padding: 24,
+    backgroundColor: "#2e2e2e",
   },
-  foto: {
-    width: 140,
-    height: 140,
-    borderRadius: 70,
-    marginBottom: 24,
+  mapa: {
+    flex: 1,
+    width: "100%",
   },
-  fotoVazia: {
-    backgroundColor: "#ddd",
-    alignItems: "center",
-    justifyContent: "center",
+  imagemMapa: {
+    width: "100%",
+    height: "100%",
   },
-  inicial: {
-    fontSize: 56,
-    color: "#555",
+  menu: {
+    position: "absolute",
+    left: "2%",
+    top: "1%",
+    width: "12%",
+    height: "5%",
   },
-  nome: {
-    fontSize: 22,
-    fontWeight: "bold",
-    marginBottom: 4,
+  curriculo: {
+    position: "absolute",
+    left: "7%",
+    top: "16%",
+    width: "34%",
+    height: "17%",
   },
-  email: {
-    fontSize: 16,
-    color: "#666",
+  entrevista: {
+    position: "absolute",
+    right: "5%",
+    top: "28%",
+    width: "38%",
+    height: "17%",
   },
-  uid: {
-    fontSize: 12,
-    color: "#999",
-    marginTop: 8,
-  },
-  botao: {
-    marginTop: 32,
-    width: 200,
+  postura: {
+    position: "absolute",
+    left: "7%",
+    top: "44%",
+    width: "35%",
+    height: "17%",
   },
 });

@@ -12,7 +12,7 @@
  * ---------------------------------------------------------------------------
  */
 import { useState } from "react";
-import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
+import { View, Text, ActivityIndicator, StyleSheet, ImageBackground } from "react-native";
 import { GoogleSigninButton } from "@react-native-google-signin/google-signin";
 
 import { entrarComGoogle, descreverErro } from "../services/autenticacao";
@@ -41,15 +41,7 @@ const LoginScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.titulo}>Minha Agenda</Text>
-      <Text style={styles.subtitulo}>Entre para continuar</Text>
-
-      {/*
-        GoogleSigninButton é o botão oficial. Além de pronto, ele atende às
-        diretrizes de marca do Google, exigidas para publicar na loja.
-        O disabled evita o erro IN_PROGRESS por toque duplo.
-      */}
+    <ImageBackground source={require("../../assets/login.png")} style={styles.container}>
       <GoogleSigninButton
         style={styles.botaoGoogle}
         size={GoogleSigninButton.Size.Wide}
@@ -63,7 +55,7 @@ const LoginScreen = () => {
         {carregando && <ActivityIndicator />}
         {erro && <Text style={styles.erro}>{erro}</Text>}
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 
@@ -73,9 +65,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
     backgroundColor: "#fff",
     padding: 24,
+  },
+  imagem: {
+    flex:1, width: "100%"
   },
   titulo: {
     fontSize: 32,
@@ -88,8 +82,10 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   botaoGoogle: {
-    width: 240,
-    height: 48,
+    position: "absolute",
+    bottom: 200,
+    width: 340,
+    height: 68,
   },
   areaAviso: {
     height: 48,
