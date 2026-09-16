@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1052516373998",
+    "project_id": "e-agora-adulto-806b8",
+    "storage_bucket": "e-agora-adulto-806b8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052516373998:android:36f26d336af4fd9811aaff",
+        "android_client_info": {
+          "package_name": "com.br.eagoraadulto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1052516373998-n5bvktdc1mp3lo4crqp9ufu8bsn3qfjc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCy-sgajQStZ5phUYQeLTAyWp5oxmidJTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1052516373998-n5bvktdc1mp3lo4crqp9ufu8bsn3qfjc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
