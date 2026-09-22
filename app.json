@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "aula-criacao-app",
-    "slug": "aula-criacao-app",
+    "name": "E agora, adultos",
+    "slug": "E-agora-adultos",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,7 +27,8 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "@react-native-google-signin/google-signin"
+      "@react-native-google-signin/google-signin",
+      "expo-font"
     ]
   }
 }

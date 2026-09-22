@@ -12,10 +12,13 @@
  * ---------------------------------------------------------------------------
  */
 import { useState } from "react";
-import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
-import { GoogleSigninButton } from "@react-native-google-signin/google-signin";
+import { StatusBar, View, Text, ActivityIndicator, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { GoogleSigninButton, handleGoogleLogin, handleAppleLogin } from "@react-native-google-signin/google-signin";
 
 import { entrarComGoogle, descreverErro } from "../services/autenticacao";
+
+import { LinearGradient } from 'expo-linear-gradient';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
 
 const LoginScreen = () => {
   const [carregando, setCarregando] = useState(false);
@@ -42,29 +45,55 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>Minha Agenda</Text>
-      <Text style={styles.subtitulo}>Entre para continuar</Text>
-
-      {/*
-        GoogleSigninButton é o botão oficial. Além de pronto, ele atende às
-        diretrizes de marca do Google, exigidas para publicar na loja.
-        O disabled evita o erro IN_PROGRESS por toque duplo.
-      */}
-      <GoogleSigninButton
-        style={styles.botaoGoogle}
-        size={GoogleSigninButton.Size.Wide}
-        color={GoogleSigninButton.Color.Dark}
-        onPress={aoPressionar}
-        disabled={carregando}
-      />
-
-      {/* Área reservada com altura fixa: evita a tela "pular" ao aparecer. */}
-      <View style={styles.areaAviso}>
-        {carregando && <ActivityIndicator />}
-        {erro && <Text style={styles.erro}>{erro}</Text>}
+      <StatusBar barStyle="light-content" />
+ 
+      {/* Top gradient sky area with owl mascot + skyline */}
+      <LinearGradient
+        colors={['#0a2a6e', '#1f7fd6', '#39c6e0']}
+        start={{ x: 0.1, y: 0 }}
+        end={{ x: 0.9, y: 1 }}
+        style={styles.topSection}
+      >
+        {/* Simple skyline silhouette using boxes */}
+        <View style={styles.skyline}>
+          {[70, 110, 60, 140, 90, 130, 75].map((h, i) => (
+            <View key={i} style={[styles.building, { height: h }]} />
+          ))}
+        </View>
+ 
+        {/* Owl mascot - replace with your own asset at ./assets/owl-teacher.png */}
+        <Image
+          source={require('../../assets/owl-teacher.png')}
+          style={styles.owl}
+          resizeMode="contain"
+        />
+      </LinearGradient>
+ 
+      {/* Bottom card area */}
+      <View style={styles.bottomSection}>
+        <Text style={styles.title}>E AGORA,{'\n'}ADULTO?</Text>
+ 
+        <TouchableOpacity
+          style={styles.googleButton}
+          activeOpacity={0.8}
+          onPress={handleGoogleLogin}
+        >
+          <AntDesign name="google" size={22} color="#4285F4" style={styles.icon} />
+          <Text style={styles.googleText}>GOOGLE</Text>
+        </TouchableOpacity>
+ 
+        <TouchableOpacity
+          style={styles.appleButton}
+          activeOpacity={0.8}
+          onPress={handleAppleLogin}
+        >
+          <Ionicons name="logo-apple" size={22} color="#fff" style={styles.icon} />
+          <Text style={styles.appleText}>APPLE</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
+
 };
 
 export default LoginScreen;
